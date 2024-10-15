@@ -4,6 +4,7 @@ import service from '../../services/todoService'
 
 interface TodoRowProps{
     todo:Todo,
+    doDelete:(todo:Todo)=>void,
  }
 function TodoRow({todo,doDelete}:TodoRowProps) {
 

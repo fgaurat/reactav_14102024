@@ -22,7 +22,6 @@ function TodoList() {
                     </tbody>
 
                 </table>
-            }
         </>
     )
 }
