@@ -1,15 +1,22 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Todo } from '../../core/Todo'
 import TodoRow from './TodoRow'
-import type { RootState } from '../../app/store'
+import type { AppDispatch, RootState } from '../../app/store'
+import { useEffect } from 'react'
+import { fetchTodoList } from '../../app/todoListSlice'
 
 function TodoList() {
 
     const todos = useSelector((state: RootState) => state.theTodos.todos)
+    const dispatch = useDispatch<AppDispatch>()
 
     const doDelete = async (todo:Todo)=>{
         console.log("doDelete",todo)
     }
+    useEffect(()=>{
+        dispatch(fetchTodoList())
+
+    },[])
     return (
         <>
             <h1>TodoList</h1>

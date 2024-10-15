@@ -1,40 +1,53 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { Todo } from '../core/Todo'
+import service from '../services/todoService'
 
 
-export interface TodoListState{
-    todos:Todo[]
-    isLoading:boolean
+// const fetchTodoList = createAsyncThunk(
+//     'todos/fetch',
+//     async () => {
+//         const data = await service.getTodos()
+//         return data
+//     },
+// )
+export const fetchTodoList = createAsyncThunk(
+    'todos/fetch',service.getTodos
+)
+
+export interface TodoListState {
+    todos: Todo[]
+    isLoading: boolean
 }
 
 const initialState: TodoListState = {
-    isLoading:false,
-    todos:[ {
+    isLoading: false,
+    todos: [{
         "userId": 1,
         "id": 10,
         "title": "illo est ratione doloremque quia maiores aut",
         "completed": true
-      },
-      {
+    },
+    {
         "userId": 1,
         "id": 11,
         "title": "vero rerum temporibus dolor",
         "completed": true
-      },
-      {
+    },
+    {
         "userId": 1,
         "id": 12,
         "title": "ipsa repellendus fugit nisi",
         "completed": true
-      }]
-  }
-  
-  export const todoListSlice = createSlice({
+    }]
+}
+
+export const todoListSlice = createSlice({
     name: 'todoList',
     initialState,
-    reducers: {}
-  })  
+    reducers: {},
+    extraReducers: (builder) => {}
+})
 
 //   export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
