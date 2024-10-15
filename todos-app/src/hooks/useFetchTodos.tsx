@@ -8,19 +8,19 @@ const useFetchTodos = ()=>{
     const [todos, setTodos] = useState<Todo[]>([])
 
     const [isLoading,setIsLoading] = useState<boolean>(true)
+    
+    const fetchTodos = async ()=>{
+        setIsLoading(true)
+        const values = await service.getTodos();
+        setIsLoading(false)
+        setTodos(values)
+    }
 
     useEffect( ()=> {
-
-        (async ()=>{
-            const values = await service.getTodos();
-            setIsLoading(false)
-            setTodos(values)
-        })()
-        
-        
+        fetchTodos()
     },[])
 
-    return {todos,isLoading}
+    return {todos,isLoading,setTodos,fetchTodos}
 }
 
 
