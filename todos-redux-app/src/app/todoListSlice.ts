@@ -12,7 +12,7 @@ import service from '../services/todoService'
 //     },
 // )
 export const fetchTodoList = createAsyncThunk(
-    'todos/fetch',service.getTodos
+    'todos/fetch', service.getTodos
 )
 
 export interface TodoListState {
@@ -22,31 +22,19 @@ export interface TodoListState {
 
 const initialState: TodoListState = {
     isLoading: false,
-    todos: [{
-        "userId": 1,
-        "id": 10,
-        "title": "illo est ratione doloremque quia maiores aut",
-        "completed": true
-    },
-    {
-        "userId": 1,
-        "id": 11,
-        "title": "vero rerum temporibus dolor",
-        "completed": true
-    },
-    {
-        "userId": 1,
-        "id": 12,
-        "title": "ipsa repellendus fugit nisi",
-        "completed": true
-    }]
+    todos: []
 }
 
 export const todoListSlice = createSlice({
     name: 'todoList',
     initialState,
     reducers: {},
-    extraReducers: (builder) => {}
+    extraReducers: (builder) => {
+        builder.addCase(fetchTodoList.fulfilled, (state, action) => {
+            state.todos = action.payload
+        })
+
+    }
 })
 
 //   export const { increment, decrement, incrementByAmount } = counterSlice.actions
