@@ -3,7 +3,7 @@ import { Todo } from '../../core/Todo'
 import TodoRow from './TodoRow'
 import type { AppDispatch, RootState } from '../../app/store'
 import { useEffect } from 'react'
-import { fetchTodoList } from '../../app/todoListSlice'
+import { fetchTodoList,deleteAndReloadTodo } from '../../app/todoListSlice'
 
 function TodoList() {
 
@@ -11,7 +11,7 @@ function TodoList() {
     const dispatch = useDispatch<AppDispatch>()
 
     const doDelete = async (todo:Todo)=>{
-        console.log("doDelete",todo)
+        dispatch(deleteAndReloadTodo(todo))
     }
     useEffect(()=>{
         dispatch(fetchTodoList())

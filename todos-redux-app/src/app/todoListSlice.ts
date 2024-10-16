@@ -14,6 +14,13 @@ import service from '../services/todoService'
 export const fetchTodoList = createAsyncThunk(
     'todos/fetch', service.getTodos
 )
+export const deleteAndReloadTodo = createAsyncThunk(
+    'todos/deleteAndReloadTodo', async (todo:Todo, thunkAPI:any)=>{
+        await service.deleteTodo(todo)
+        thunkAPI.dispatch(fetchTodoList())
+
+    }
+)
 
 export interface TodoListState {
     todos: Todo[]
